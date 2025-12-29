@@ -1,10 +1,15 @@
-<html>
-<head>
-    <title>Item Details</title>
-</head>
-<body>
-        <h1>task name: {{task["name"]}}</h1>
-        <br>
-        <h1>deadline : {{task["date"]}}</h1>
-</body>
-</html>
+<h1><a href="/task">main menu</a></h1>
+<div style="margin-bottom: 20px;">
+    <h2>Task: {{ task.name }}</h2>
+    <h3>Deadline: {{ task.date }}</h3>
+    <h3>Status: {% if task.completed %}Completed{% else %}Not Completed{% endif %}</h3>
+
+    <form action="/task/status_update/{{ task.id }}?next=/task/{{ task.id }}" method="post">
+        <button type="submit">Mark as Completed</button>
+    </form>
+    {% if task.completed %}
+    <p>✅ Task already completed!</p>
+    {% endif %}
+</div>
+<hr>
+

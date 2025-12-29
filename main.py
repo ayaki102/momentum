@@ -59,7 +59,7 @@ async def get_task(request: Request, id: int):
 
 
 @app.post("/task/status_update/{id}")
-async def complete_task(id: int):
+async def complete_task(id: int, request: Request):
     if id < 1 or id > len(tasks):
         return HTMLResponse(content="Task not found", status_code=404)
     if tasks[id - 1][COMPLETED]:
@@ -67,4 +67,5 @@ async def complete_task(id: int):
     else:
         tasks[id - 1][COMPLETED] = True
 
-    return RedirectResponse(url="/task", status_code=303)
+    next_url = request.query_params.get("next", "/task")
+    return RedirectResponse(url=next_url, status_code=303)

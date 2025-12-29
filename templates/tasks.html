@@ -2,7 +2,7 @@
 
 {% for task in tasks %}
 <div style="margin-bottom: 20px;">
-    <h2>Task: {{ task.name }}</h2>
+    <h2>Task: <a href="/task/{{ task.id }}">{{ task.name }}</a></h2>
     <h3>Deadline: {{ task.date }}</h3>
     <h3>Status: {% if task.completed %}Completed{% else %}Not Completed{% endif %}</h3>
 

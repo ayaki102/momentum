@@ -7,6 +7,11 @@
     <form action="/task/status_update/{{ task.id }}?next=/task/{{ task.id }}" method="post">
         <button type="submit">Mark as Completed</button>
     </form>
+
+    <form action="/task/delete/{{ task.id }}?next=/task" method="post">
+        <button type="submit">Delete Task</button>
+        
+    </form>
     {% if task.completed %}
     <p>✅ Task already completed!</p>
     {% endif %}

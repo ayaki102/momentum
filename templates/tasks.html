@@ -1,5 +1,31 @@
 <h1>All Tasks</h1>
 
+<form action="/task/create" method="post">
+    <label>
+        Task name:
+        <input type="text" name="name" required>
+    </label>
+
+    <br>
+
+    <label>
+        Date:
+        <input type="date" name="date" required>
+    </label>
+
+    <label>
+        Time
+        <input type="time" name="time" required>
+
+    </label>
+
+    <br>
+
+    <button type="submit">Create Task</button>
+</form>
+
+
+{% if tasks|length != 0 %}
 {% for task in tasks %}
 <div style="margin-bottom: 20px;">
     <h2>Task: <a href="/task/{{ task.id }}">{{ task.name }}</a></h2>
@@ -9,10 +35,18 @@
     <form action="/task/status_update/{{ task.id }}" method="post">
         <button type="submit">Mark as Completed</button>
     </form>
+    <form action="/task/delete/{{ task.id }}" method="post">
+        <button type="submit">Delete Task</button>
+        
+    </form>
     {% if task.completed %}
     <p>✅ Task already completed!</p>
     {% endif %}
 </div>
 <hr>
 {% endfor %}
-
+{% else %}
+<div>
+    Add your first task
+</div>
+{% endif %}

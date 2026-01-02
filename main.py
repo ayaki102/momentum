@@ -1,7 +1,6 @@
-from os import stat
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse, RedirectResponse
-from fastapi.staticfiles import StaticFiles
+from fastapi.staticfiles import StaticFiles  # noqa: F401
 from fastapi.templating import Jinja2Templates
 
 app = FastAPI()
@@ -44,10 +43,10 @@ def read_root():
     return {"Hello": "World"}
 
 
-@app.get("/task")
+@app.get("/dashboard")
 async def get_tasks(request: Request):
     return templates.TemplateResponse(
-        request=request, name="tasks.html", context={"tasks": tasks}
+        request=request, name="dashboard.html", context={"tasks": tasks}
     )
 
 
